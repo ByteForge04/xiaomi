@@ -1,0 +1,29 @@
+server:
+  port: 8081
+mybatis:
+  type-aliases-package: org.battery.xiaomicarbatterywarn.mybatis.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mappers/*xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.88.136:3306/xiaomi_car_battery_warn_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.88.136
+    password: 123456
+    port: 6379
+    timeout: 3000
+    database: 0
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: warn-producer-group
+    send-message-timeout: 3000
+  consumer:
+    group: warn-consumer-group
+logging:
+  level:
+    org.xiaomi.mapper: debug

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xiaomi.mapper.VehicleInfoMapper">
+    <resultMap id="BaseResultMap" type="org.xiaomi.entity.VehicleInfo">
+        <id property="carId" column="car_id" />
+        <result property="vid" column="vid" />
+        <result property="batteryType" column="battery_type" />
+        <result property="totalMileage" column="total_mileage" />
+        <result property="batteryHealthPercentage" column="battery_health_percentage" />
+    </resultMap>
+
+    <insert id="insert" parameterType="org.xiaomi.entity.VehicleInfo" useGeneratedKeys="true" keyProperty="carId">
+        INSERT INTO vehicle_info (vid,  battery_type, total_mileage, battery_health_percentage)
+        VALUES (#{vid},  #{batteryType}, #{totalMileage}, #{batteryHealthPercentage})
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM vehicle_info
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
+        SELECT * FROM vehicle_info WHERE car_id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.xiaomi.entity.VehicleInfo">
+        UPDATE vehicle_info
+        <set>
+            <if test="vid != null and vid != ''">
+                vid = #{vid},
+            </if>
+            <if test="batteryType != null and batteryType != ''">
+                battery_type = #{batteryType},
+            </if>
+            <if test="totalMileage != null">
+                total_mileage = #{totalMileage},
+            </if>
+            <if test="batteryHealthPercentage != null">
+                battery_health_percentage = #{batteryHealthPercentage},
+            </if>
+        </set>
+        WHERE car_id = #{carId}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM vehicle_info WHERE car_id = #{id}
+    </delete>
+</mapper> 

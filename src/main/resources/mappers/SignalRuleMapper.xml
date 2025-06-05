@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xiaomi.mapper.SignalRuleMapper">
+    <resultMap id="BaseResultMap" type="org.xiaomi.entity.SignalRule">
+        <id property="id" column="id"/>
+        <result property="warnId" column="warn_id"/>
+        <result property="warnName" column="warn_name"/>
+        <result property="batteryType" column="battery_type"/>
+        <result property="warningRule" column="warning_rule"/>
+    </resultMap>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT *
+        FROM signal_rule
+        <where>
+            <if test="warnId != null and warnId != ''">
+                warn_id = #{warnId}
+            </if>
+            <if test="batteryType != null and batteryType != ''">
+                AND battery_type = #{batteryType}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

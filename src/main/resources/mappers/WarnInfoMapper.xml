@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xiaomi.mapper.WarnInfoMapper">
+    <resultMap id="BaseResultMap" type="org.xiaomi.entity.WarnInfo">
+        <id property="id" column="id"/>
+        <result property="carId" column="car_id"/>
+        <result property="ruleId" column="rule_id"/>
+        <result property="warnType" column="warn_type"/>
+        <result property="warnMsg" column="warn_msg"/>
+        <result property="signalValue" column="signal_value"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="org.xiaomi.entity.WarnInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO warn_info (car_id, rule_id, warn_type, warn_msg, signal_value, create_time)
+        VALUES (#{carId}, #{ruleId}, #{warnType}, #{warnMsg}, #{signalValue}, NOW())
+    </insert>
+
+    <select id="selectByCarId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM warn_info WHERE car_id = #{carId} ORDER BY create_time DESC
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM warn_info ORDER BY create_time DESC
+    </select>
+</mapper>

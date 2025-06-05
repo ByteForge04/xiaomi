@@ -1,0 +1,13 @@
+package org.xiaomi;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class XiaomiCarBatteryWarnApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
